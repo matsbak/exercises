@@ -12,7 +12,7 @@
 	<artifactId>hello-endpoints</artifactId>
 	<version>1.0.0</version>
 	<name>hello-endpoints</name>
-	<description>Exercise project in course IDATA2306 Application Development at NTNU</description>
+	<description>Exercise project for course IDATA2306 Application Development at NTNU</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
