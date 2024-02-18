@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>no.ntnu.idata2306.exercise</groupId>
 	<artifactId>hello</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>hello</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Exercise project for course IDATA2306 Application Development at NTNU</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
