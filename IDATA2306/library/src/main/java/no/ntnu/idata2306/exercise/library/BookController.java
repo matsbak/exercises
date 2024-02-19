@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -93,5 +94,17 @@ public class BookController {
       responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(book.getId());
     }
     return responseEntity;
+  }
+
+  @DeleteMapping("/books/{id}")
+  public ResponseEntity<String> restDeleteBook(@PathVariable int id) {
+    ResponseEntity<String> response;
+    try {
+      this.books.remove(id - 1);
+      response = ResponseEntity.status(HttpStatus.OK).body("");
+    } catch (IndexOutOfBoundsException e) {
+      response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+    }
+    return response;
   }
 }
