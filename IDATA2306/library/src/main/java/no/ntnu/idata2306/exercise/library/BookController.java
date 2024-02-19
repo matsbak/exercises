@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 public class BookController {
   ArrayList<Book> books;
@@ -47,7 +52,27 @@ public class BookController {
   }
 
   @PostMapping("/books")
-  public ResponseEntity<String> restAddBook(@RequestBody Book book) {
+  @Operation(
+    summary = "Create new book",
+    description = "Create a new book that is added to the collection of books if it is created " +
+                  "with valid parameters"
+  )
+  @ApiResponses(value =  {
+    @ApiResponse(
+      responseCode = "201",
+      description = "A confirmation message is returned in the response body"
+    ),
+    @ApiResponse(
+      responseCode = "400",
+      description = "An error message explaining why the request was bad is returned in the " +
+                    "response body"
+    )
+  })
+  public ResponseEntity<String> restAddBook(
+    @Parameter(description = "The book to create")
+    @RequestBody
+    Book book
+  ) {
     ResponseEntity<String> responseEntity = null;
     if (book.getTitle().isBlank()) {
       responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Title cannot be blank");
