@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>no.ntnu.idata2306.exercise</groupId>
 	<artifactId>library</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>library</name>
 	<description>Exercise project for course IDATA2306 Application Development at NTNU</description>
 	<properties>
