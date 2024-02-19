@@ -1,10 +1,17 @@
 package no.ntnu.idata2306.exercise.library;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Represents a book in the library")
 public class Book {
   private static int i = 1;
+  @Schema(description = "Unique auto-generated ID")
   private int id;
+  @Schema(description = "Title of the book")
   private String title;
+  @Schema(description = "Year the book was published")
   private int year;
+  @Schema(description = "Number of pages in the book")
   private int numberOfPages;
 
   public Book(String title, int year, int numberOfPages) {
