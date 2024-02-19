@@ -102,6 +102,7 @@ public class BookController {
     try {
       this.books.remove(id - 1);
       response = ResponseEntity.status(HttpStatus.OK).body("");
+      Book.decrement();
     } catch (IndexOutOfBoundsException e) {
       response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
     }
