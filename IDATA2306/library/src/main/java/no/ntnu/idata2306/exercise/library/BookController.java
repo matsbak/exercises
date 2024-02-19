@@ -68,29 +68,29 @@ public class BookController {
                     "response body"
     )
   })
-  public ResponseEntity<String> restAddBook(
+  public ResponseEntity<Integer> restAddBook(
     @Parameter(description = "The book to create")
     @RequestBody
     Book book
   ) {
-    ResponseEntity<String> responseEntity = null;
-    if (book.getTitle().isBlank()) {
-      responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Title cannot be blank");
-      Book.decrement();
-    }
-    if (book.getYear() < 0) {
-      responseEntity = ResponseEntity
-      .status(HttpStatus.BAD_REQUEST).body("Year cannot be negative");
-      Book.decrement();
-    }
-    if (book.getNumberOfPages() < 1) {
-      responseEntity = ResponseEntity
-      .status(HttpStatus.BAD_REQUEST).body("Number of pages cannot be negative or 0");
-      Book.decrement();
-    }
+    ResponseEntity<Integer> responseEntity = null;
+    // if (book.getTitle().isBlank()) {
+    //   responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Title cannot be blank");
+    //   Book.decrement();
+    // }
+    // if (book.getYear() < 0) {
+    //   responseEntity = ResponseEntity
+    //   .status(HttpStatus.BAD_REQUEST).body("Year cannot be negative");
+    //   Book.decrement();
+    // }
+    // if (book.getNumberOfPages() < 1) {
+    //   responseEntity = ResponseEntity
+    //   .status(HttpStatus.BAD_REQUEST).body("Number of pages cannot be negative or 0");
+    //   Book.decrement();
+    // }
     if (responseEntity == null) {
       this.books.add(book);
-      responseEntity = ResponseEntity.status(HttpStatus.CREATED).body("Book added");
+      responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(book.getId());
     }
     return responseEntity;
   }
