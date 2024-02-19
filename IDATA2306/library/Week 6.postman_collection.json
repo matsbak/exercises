@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "8cd3a9ab-57a3-46c0-8fb4-a98157793a3a",
+		"name": "Week 6",
+		"description": "Continued library exercise project for week 6.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33041998"
+	},
+	"item": [
+		{
+			"name": "GET /books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Array contains 3 objects\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Objects in array are valid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for (var i = 0; i < jsonData.length; i++) {\r",
+							"        pm.expect(jsonData[i]).to.have.property('id');\r",
+							"        pm.expect(jsonData[i]).to.have.property('title');\r",
+							"        pm.expect(jsonData[i]).to.have.property('year');\r",
+							"        pm.expect(jsonData[i]).to.have.property('numberOfPages');\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books/772",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/772",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"772"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD /books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"new_book_id\", pm.response.text());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Learning web design, 5th edition\",\r\n    \"year\": 2018,\r\n    \"numberOfPages\": 736\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/books",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Array contains 4 objects\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Objects in array are valid\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for (var i = 0; i < jsonData.length; i++) {\r",
+							"        pm.expect(jsonData[i]).to.have.property('id');\r",
+							"        pm.expect(jsonData[i]).to.have.property('title');\r",
+							"        pm.expect(jsonData[i]).to.have.property('year');\r",
+							"        pm.expect(jsonData[i]).to.have.property('numberOfPages');\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books/4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Object has valid selected parameters with values\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('title', 'Learning web design, 5th edition');\r",
+							"    pm.expect(jsonData).to.have.property('year', 2018);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/4",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books/4 (variable)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Object has valid selected parameter\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('title');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/{{new_book_id}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"{{new_book_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /books/883",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/883",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"883"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /books/4 (variable)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/{{new_book_id}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"{{new_book_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Array contains 3 objects\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /books/4 (variable)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/{{new_book_id}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"{{new_book_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /books/4 (variable)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/books/{{new_book_id}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"books",
+						"{{new_book_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
