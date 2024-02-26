@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Flexbox holy grail</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    header {
+      width: 100%;
+      height: 120px;
+      background-color: #70AFDA;
+      order: -2;
+    }
+    main {
+      background-color: #E4B2B3;
+      flex: 1;
+      order: 0;
+    }
+    nav {
+      width: 220px;
+      background-color: #886CB9;
+      order: -1;
+    }
+    aside {
+      width: 220px;
+      background-color: #886CB9;
+      order: 1;
+    }
+    footer {
+      width: 100%;
+      height: 120px;
+      background-color: #70AFDA;
+      order: 2;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>Welcome to a demo of the holy grail layout using flexbox CSS features!</h1>
+    </header>
+    <main>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra pretium libero sed
+        ultricies. In hac habitasse platea dictumst. Etiam a erat sed tortor ullamcorper rutrum.
+        Proin facilisis lorem et accumsan ultrices. Curabitur ut aliquam ante, a congue velit.
+        Vivamus velit lacus, finibus sed interdum maximus, tincidunt at lectus. Curabitur
+        vestibulum volutpat magna a faucibus. Vivamus vestibulum sit amet velit varius tempor.
+        Morbi at lacinia ex.
+      </p>
+    </main>
+    <nav>
+      <div>Home</div>
+      <div>Gallery</div>
+      <div>About us</div>
+      <div>Contacts</div>
+    </nav>
+    <aside>
+      <div>Ad Nr 1</div>
+      <div>Ad Nr 2</div>
+      <div>Ad Nr 3</div>
+    </aside>
+    <footer>
+      <p>Copyright &copy; 2024</p>
+    </footer>
+  </body>
+</html>
