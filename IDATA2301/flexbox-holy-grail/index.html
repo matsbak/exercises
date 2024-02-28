@@ -8,35 +8,74 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+
       display: flex;
       flex-wrap: wrap;
     }
     header {
-      width: 100%;
-      height: 120px;
+      height: 12vh;
+      border-bottom: dashed;
       background-color: #70AFDA;
+
+      flex: 0 1 100%;
       order: -2;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     main {
+      padding: 20px;
       background-color: #E4B2B3;
-      flex: 1;
+
+      flex: 1; /* flex: 1 1 0% */
       order: 0;
     }
     nav {
-      width: 220px;
+      height: 76vh;
+      border-right: dashed;
       background-color: #886CB9;
+
+      flex: 0 1 10%;
       order: -1;
+
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
     }
     aside {
-      width: 220px;
+      height: 76vh;
+      border-left: dashed;
       background-color: #886CB9;
+
+      flex: 0 1 10%;
       order: 1;
+
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
     }
     footer {
-      width: 100%;
-      height: 120px;
+      height: 12vh;
+      border-top: dashed;
       background-color: #70AFDA;
+
+      flex: 0 1 100%;
       order: 2;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    p {
+      margin: 0;
+    }
+    div {
+      margin-top: 10px;
+      padding: 10px;
+      width: 80%;
+      border: 1px dashed;
+      text-align: center;
     }
   </style>
   <body>
