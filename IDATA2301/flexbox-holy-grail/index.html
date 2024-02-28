@@ -6,104 +6,96 @@
   </head>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+
+      min-width: 1000px;
+      min-height: 100vh;
+      margin: 0;
+
+      font-size: 1.2em;
+      font-family: sans-serif;
     }
     header {
-      height: 12vh;
-      border-bottom: dashed;
-      background-color: #70AFDA;
-
-      flex: 0 1 100%;
-      order: -2;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    main {
-      padding: 20px;
-      min-width: 600px;
-      background-color: #E4B2B3;
-
-      flex: 1; /* flex: 1 1 0% */
-      order: 0;
-    }
-    nav {
-      height: 76vh;
-      border-right: dashed;
-      background-color: #886CB9;
-
-      flex: 0 1 10%;
-      order: -1;
-
-      display: flex;
-      flex-flow: column wrap;
-      align-items: center;
-    }
-    aside {
-      height: 76vh;
-      border-left: dashed;
-      background-color: #886CB9;
-
-      flex: 0 1 10%;
-      order: 1;
-
-      display: flex;
-      flex-flow: column wrap;
-      align-items: center;
+      border-bottom: 3px dashed;
     }
     footer {
-      height: 12vh;
-      border-top: dashed;
-      background-color: #70AFDA;
-
-      flex: 0 1 100%;
-      order: 2;
-
+      border-top: 3px dashed;
+    }
+    header, footer {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      height: 95px;
+      padding: 20px;
+      background-color: #59B1DE;
+
+      text-align: center;
+    }
+    main {
+      flex: 1 0 600px;
+
+      min-width: 600px;
+      padding: 20px;
+      background-color: #EFAFB2;
+    }
+    nav {
+      order: -1;
+      
+      border-right: 3px dashed;
+    }
+    aside {
+      border-left: 3px dashed;
+    }
+    nav, aside {
+      flex: 0 0 200px;
+
+      background-color: #8E6ABE;
     }
     p {
       margin: 0;
     }
-    div {
-      margin-top: 10px;
+    .element-container {
+      margin: 10px;
       padding: 10px;
-      width: 80%;
+
       border: 1px dashed;
+      
       text-align: center;
+    }
+    #main-container {
+      display: flex;
+      flex-grow: 1;
     }
   </style>
   <body>
     <header>
       <h1>Welcome to a demo of the holy grail layout using flexbox CSS features!</h1>
     </header>
-    <main>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra pretium libero sed
-        ultricies. In hac habitasse platea dictumst. Etiam a erat sed tortor ullamcorper rutrum.
-        Proin facilisis lorem et accumsan ultrices. Curabitur ut aliquam ante, a congue velit.
-        Vivamus velit lacus, finibus sed interdum maximus, tincidunt at lectus. Curabitur
-        vestibulum volutpat magna a faucibus. Vivamus vestibulum sit amet velit varius tempor.
-        Morbi at lacinia ex.
-      </p>
-    </main>
-    <nav>
-      <div>Home</div>
-      <div>Gallery</div>
-      <div>About us</div>
-      <div>Contacts</div>
-    </nav>
-    <aside>
-      <div>Ad Nr 1</div>
-      <div>Ad Nr 2</div>
-      <div>Ad Nr 3</div>
-    </aside>
+    <div id="main-container">
+      <main>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias at cum eaque earum,
+        eius eligendi, enim eos error esse, excepturi harum illum impedit laudantium molestias nemo
+        nostrum officia pariatur praesentium provident quaerat quibusdam quo quod repellat sapiente
+        sequi sint tempore unde veritatis vitae. Ab at eos error, eum hic itaque magni maiores,
+        minus nam nisi pariatur qui ratione temporibus tenetur voluptatibus! Commodi consequatur
+        debitis, dolor doloremque ea enim, facere fuga fugiat id mollitia numquam officia quidem
+        quis quo recusandae, rem sequi similique sint temporibus totam ut velit vero. A, aut labore
+        nemo omnis optio quod sequi sit totam ut.</p>
+      </main>
+      <nav>
+        <div class="element-container"><p>Home</p></div>
+        <div class="element-container"><p>Gallery</p></div>
+        <div class="element-container"><p>About us</p></div>
+        <div class="element-container"><p>Contacts</p></div>
+      </nav>
+      <aside>
+        <div class="element-container"><p>Ad Nr 1</p></div>
+        <div class="element-container"><p>Ad Nr 2</p></div>
+        <div class="element-container"><p>Ad Nr 3</p></div>
+      </aside>
+    </div>
     <footer>
       <p>Copyright &copy; 2024</p>
     </footer>
