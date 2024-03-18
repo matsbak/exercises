@@ -13,6 +13,6 @@ public record Book(int id, String title, int year, int numberOfPages) {
    */
   @JsonIgnore
   public boolean isValid() {
-    return title != null && !title.equals("");
+    return this.title != null && !this.title.isBlank() && this.year > 0 && this.numberOfPages > 0;
   }
 }

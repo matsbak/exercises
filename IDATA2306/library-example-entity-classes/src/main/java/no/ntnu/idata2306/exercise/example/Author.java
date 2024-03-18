@@ -26,8 +26,7 @@ public class Author {
 
   public Author() {}
 
-  public Author(int id, String firstName, String lastName, int birthYear) {
-    this.id = id;
+  public Author(String firstName, String lastName, int birthYear) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthYear = birthYear;
@@ -56,6 +55,7 @@ public class Author {
    */
   @JsonIgnore
   public boolean isValid() {
-    return this.firstName != null && this.lastName != null && this.birthYear > 0;
+    return this.firstName != null && !this.firstName.isBlank() && this.lastName != null &&
+           !this.lastName.isBlank() && this.birthYear > 0;
   }
 }

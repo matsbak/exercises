@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @param birthYear The year this person was born
  */
 public record Author(int id, String firstName, String lastName, int birthYear) {
-
   /**
    * Checks if the object is a valid author.
    *
@@ -19,6 +18,7 @@ public record Author(int id, String firstName, String lastName, int birthYear) {
    */
   @JsonIgnore
   public boolean isValid() {
-    return firstName != null && lastName != null && birthYear > 0;
+    return this.firstName != null && !this.firstName.isBlank() && lastName != null &&
+           !this.lastName.isBlank() && birthYear > 0;
   }
 }

@@ -144,7 +144,7 @@ public class BookController {
   }
 
   /**
-   * Try to update a book with given ID. The ID of the book must match the given ID.
+   * Try to update a book with the given ID. The ID of the book must match the given ID.
    *
    * @param id The given ID
    * @param book The updated book data

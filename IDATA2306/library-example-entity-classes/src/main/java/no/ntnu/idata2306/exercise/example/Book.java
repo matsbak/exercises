@@ -21,8 +21,7 @@ public class Book {
 
   public Book() {}
 
-  public Book(int id, String title, int year, int numberOfPages) {
-    this.id = id;
+  public Book(String title, int year, int numberOfPages) {
     this.title = title;
     this.year = year;
     this.numberOfPages = numberOfPages;
@@ -51,6 +50,6 @@ public class Book {
    */
   @JsonIgnore
   public boolean isValid() {
-    return this.title != null && !this.title.equals("");
+    return this.title != null && !this.title.isBlank() && this.year > 0 && this.numberOfPages > 0;
   }
 }

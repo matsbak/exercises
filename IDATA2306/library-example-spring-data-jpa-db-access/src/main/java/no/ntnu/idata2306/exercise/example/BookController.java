@@ -29,21 +29,17 @@ public class BookController {
   private int latestId;
 
   public BookController() {
-    initializeData();
+    this.initializeData();
   }
 
   /**
    * Initialize dummy book data for the collection.
    */
   private void initializeData() {
-    latestId = 1;
-    books = new HashMap<>();
-    addBookToCollection(new Book(-1, "Computer Networks", 2016, 800));
-    addBookToCollection(new Book(-1, "12 Rules for Life", 2019, 600));
-  }
-
-  private int createNewId() {
-    return latestId++;
+    this.latestId = 1;
+    this.books = new HashMap<>();
+    this.addBookToCollection(new Book(-1, "Computer Networks", 2016, 800));
+    this.addBookToCollection(new Book(-1, "12 Rules for Life", 2019, 600));
   }
 
   /**
@@ -55,19 +51,19 @@ public class BookController {
   @GetMapping
   public Collection<Book> getAll() {
     logger.info("Getting all books");
-    return books.values();
+    return this.books.values();
   }
 
   /**
    * Get a specific book.
    *
-   * @param id ID` of the book to be returned
+   * @param id ID of the book to be returned
    * @return Book with the given ID or status 404
    */
   @GetMapping("/{id}")
   public ResponseEntity<Book> getOne(@PathVariable Integer id) {
     ResponseEntity<Book> response;
-    Book book = findBookById(id);
+    Book book = this.findBookById(id);
     if (book != null) {
       response = new ResponseEntity<>(book, HttpStatus.OK);
     } else {
@@ -81,32 +77,52 @@ public class BookController {
    *
    * @param book Data of the book to add. ID will be ignored.
    * @return 201 Created on success and the new ID in the response body,
-   *     400 Bad request if some data is missing or incorrect
+   *         400 Bad request if some data is missing or incorrect
    */
   @PostMapping()
   ResponseEntity<String> add(@RequestBody Book book) {
     ResponseEntity<String> response;
-
     try {
-      int id = addBookToCollection(book);
+      int id = this.addBookToCollection(book);
       response = new ResponseEntity<>("" + id, HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
       response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-
     return response;
+  }
+
+  /**
+   * Add a new book to the collection. Note: ID will be auto-generated, the original ID will
+   * not be used!
+   *
+   * @param book The book to add
+   * @return The ID of the added book
+   * @throws IllegalArgumentException When the provided book is not valid
+   */
+  private int addBookToCollection(Book book) throws IllegalArgumentException {
+    if (!book.isValid()) {
+      throw new IllegalArgumentException("Book is invalid");
+    }
+    int id = this.createNewId();
+    this.books.put(id, new Book(id, book.title(), book.year(), book.numberOfPages()));
+    return id;
+  }
+
+  private int createNewId() {
+    return this.latestId++;
   }
 
   /**
    * Delete a book from the collection.
    *
    * @param id ID of the book to delete
-   * @return 200 OK on success, 404 Not found on error
+   * @return 200 OK on success,
+   *         404 Not found on error
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
-    if (removeBookFromCollection(id)) {
+    if (this.removeBookFromCollection(id)) {
       response = new ResponseEntity<>(HttpStatus.OK);
     } else {
       response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -118,31 +134,54 @@ public class BookController {
    * Remove a book from the collection.
    *
    * @param id ID of the book to remove
-   * @return True when book with that ID existed and was removed, false otherwise.
+   * @return True when book with that ID existed and was removed, false otherwise
    */
   private boolean removeBookFromCollection(int id) {
-    Book removedBook = books.remove(id);
+    Book removedBook = this.books.remove(id);
     return removedBook != null;
   }
 
   /**
    * Update a book in the repository.
    *
-   * @param id   ID of the book to update, from the URL
+   * @param id ID of the book to update, from the URL
    * @param book New book data to store, from request body
-   * @return 200 OK on success, 400 Bad request on error with error message in the response body
+   * @return 200 OK on success,
+   *         400 Bad request on error with error message in the response body
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> update(@PathVariable int id, @RequestBody Book book) {
     ResponseEntity<String> response;
     try {
-      updateBook(id, book);
+      this.updateBook(id, book);
       response = new ResponseEntity<>(HttpStatus.OK);
     } catch (Exception e) {
       response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
-
     return response;
+  }
+
+  /**
+   * Try to update a book with the given ID. The ID of the book must match the given ID.
+   *
+   * @param id The given ID
+   * @param book The updated book data
+   * @throws IllegalArgumentException If something goes wrong,
+   *                                  error message can be used in HTTP response.
+   */
+  private void updateBook(int id, Book book) throws IllegalArgumentException {
+    Book existingBook = this.findBookById(id);
+    if (existingBook == null) {
+      throw new IllegalArgumentException("No book with id " + id + " found");
+    }
+    if (book == null || !book.isValid()) {
+      throw new IllegalArgumentException("Wrong data in request body");
+    }
+    if (book.id() != id) {
+      throw new IllegalArgumentException("Book ID in the URL does not match the ID in JSON data " +
+                                         "(response body)");
+    }
+    this.books.put(id, book);
   }
 
   /**
@@ -152,47 +191,6 @@ public class BookController {
    * @return Book or null if not found
    */
   private Book findBookById(Integer id) {
-    return books.get(id);
-  }
-
-  /**
-   * Add a new book to the collection. Note: ID will be auto-generated, the original ID will
-   * not be used!
-   *
-   * @param book The book to add
-   * @return the ID of the added book
-   * @throws IllegalArgumentException When the provided book is not valid
-   */
-  private int addBookToCollection(Book book) throws IllegalArgumentException {
-    if (!book.isValid()) {
-      throw new IllegalArgumentException("Book is invalid");
-    }
-    int id = createNewId();
-    books.put(id, new Book(id, book.title(), book.year(), book.numberOfPages()));
-    return id;
-  }
-
-  /**
-   * Try to update a book with given ID. The book.id must match the id.
-   *
-   * @param id   ID of the book
-   * @param book The updated book data
-   * @throws IllegalArgumentException If something goes wrong.
-   *                                  Error message can be used in HTTP response.
-   */
-  private void updateBook(int id, Book book) throws IllegalArgumentException {
-    Book existingBook = findBookById(id);
-    if (existingBook == null) {
-      throw new IllegalArgumentException("No book with id " + id + " found");
-    }
-    if (book == null || !book.isValid()) {
-      throw new IllegalArgumentException("Wrong data in request body");
-    }
-    if (book.id() != id) {
-      throw new IllegalArgumentException(
-          "Book ID in the URL does not match the ID in JSON data (response body)");
-    }
-
-    books.put(id, book);
+    return this.books.get(id);
   }
 }
