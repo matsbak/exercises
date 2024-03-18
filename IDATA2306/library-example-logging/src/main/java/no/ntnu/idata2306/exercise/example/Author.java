@@ -18,7 +18,7 @@ public record Author(int id, String firstName, String lastName, int birthYear) {
    */
   @JsonIgnore
   public boolean isValid() {
-    return this.firstName != null && !this.firstName.isBlank() && lastName != null &&
-           !this.lastName.isBlank() && birthYear > 0;
+    return firstName != null && !firstName.isBlank() && lastName != null && !lastName.isBlank() &&
+           birthYear > 0;
   }
 }
